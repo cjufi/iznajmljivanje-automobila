@@ -73,6 +73,11 @@ public class FrmMain extends javax.swing.JFrame {
         });
 
         btnZaustavi.setText("Zaustavi server");
+        btnZaustavi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnZaustaviActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ulogovani korisnici");
         jLabel2.setBorder(new javax.swing.border.MatteBorder(null));
@@ -185,6 +190,19 @@ public class FrmMain extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnPokreniActionPerformed
+
+    private void btnZaustaviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZaustaviActionPerformed
+        if(serverThread.getServerSocket() != null && serverThread.getServerSocket().isBound()) {
+            try {
+                serverThread.getServerSocket().close();
+                System.out.println("Server ugasen");
+                btnPokreni.setEnabled(true);
+                btnZaustavi.setEnabled(false);
+            } catch (IOException ex) {
+                Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnZaustaviActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
