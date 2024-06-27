@@ -9,5 +9,5 @@ package communication;
  * @author Filip
  */
 public enum Operation {
-    LOGIN, LOGOUT, KREIRAJ_KLIJENTA
+    LOGIN, LOGOUT, KREIRAJ_KLIJENTA, NADJI_KLIJENTE, UCITAJ_KLIJENTA, ZAPAMTI_KLIJENTA, OBRISI_KLIJENTA
 }
