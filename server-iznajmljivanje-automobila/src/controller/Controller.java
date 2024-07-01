@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import operation.AbstractSO;
 import operation.klijent.KreirajKlijenta;
+import operation.klijent.NadjiKlijenta;
+import operation.klijent.NadjiKlijente;
+import operation.klijent.ObrisiKlijenta;
+import operation.klijent.ZapamtiKlijenta;
 import operation.korisnik.LoginKorisnik;
 import server.Server;
 
@@ -69,6 +73,30 @@ public class Controller {
     
     public void kreirajKlijenta(Klijent klijent) throws Exception {
         AbstractSO operation = new KreirajKlijenta();
+        operation.execute(klijent);
+    }
+    
+    public List<Klijent> nadjiKlijente(Klijent klijentNadji) throws Exception {
+        AbstractSO operation = new NadjiKlijente();
+        operation.execute(klijentNadji);
+        List<Klijent> klijenti = ((NadjiKlijente) operation).getKandidati();
+        return klijenti;
+    }
+    
+    public Klijent ucitajKlijenta(Klijent klijentUcitaj) throws Exception {
+        AbstractSO operation = new NadjiKlijenta();
+        operation.execute(klijentUcitaj);
+        Klijent k = ((NadjiKlijenta) operation).getKlijent();
+        return k;
+    }
+    
+    public void obrisiKlijenta(Klijent klijent) throws Exception {
+        AbstractSO operation = new ObrisiKlijenta();
+        operation.execute(klijent);
+    }
+    
+    public void izmeniKlijenta(Klijent klijent) throws Exception {
+        AbstractSO operation = new ZapamtiKlijenta();
         operation.execute(klijent);
     }
 }

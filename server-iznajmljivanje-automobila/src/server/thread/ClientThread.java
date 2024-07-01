@@ -73,6 +73,28 @@ public class ClientThread extends Thread {
                             Controller.getInstance().kreirajKlijenta(klijent);
                             response.setUspesno(true);
                             break;
+                        case NADJI_KLIJENTE:
+                            Klijent klijentNadji = (Klijent) request.getArgument();
+                            List<Klijent> klijenti = Controller.getInstance().nadjiKlijente(klijentNadji);
+                            response.setResult(klijenti);
+                            response.setUspesno(true);
+                            break;
+                        case UCITAJ_KLIJENTA:
+                            Klijent klijentUcitaj = (Klijent) request.getArgument();
+                            Klijent klijentNadjen = Controller.getInstance().ucitajKlijenta(klijentUcitaj);
+                            response.setResult(klijentNadjen);
+                            response.setUspesno(true);
+                            break;
+                        case OBRISI_KLIJENTA:
+                            Klijent klijentObrisi = (Klijent) request.getArgument();
+                            Controller.getInstance().obrisiKlijenta(klijentObrisi);
+                            response.setUspesno(true);
+                            break;
+                        case ZAPAMTI_KLIJENTA:
+                            Klijent klijentIzmeni = (Klijent) request.getArgument();
+                            Controller.getInstance().izmeniKlijenta(klijentIzmeni);
+                            response.setUspesno(true);
+                            break;
                         default:
                             System.err.println("Operacija "+request.getOperation() +" nije implementirana");
                     }

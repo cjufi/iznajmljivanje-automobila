@@ -11,18 +11,24 @@ import operation.AbstractSO;
  *
  * @author Filip
  */
-public class KreirajKlijenta extends AbstractSO {
-
+public class NadjiKlijenta extends AbstractSO {
+    
+    Klijent klijent = null;
+    
     @Override
     protected void preconditions(Object param) throws Exception {
-        if(param == null || !(param instanceof Klijent)) {
+        if (param == null || !(param instanceof Klijent)) {
             throw new Exception("Invalid parameter");
         }
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        Klijent k = (Klijent) param;
-        repository.dodaj(k);
+        klijent = (Klijent) param;
+        repository.nadji(klijent);
+    }
+
+    public Klijent getKlijent() {
+        return klijent;
     }
 }
