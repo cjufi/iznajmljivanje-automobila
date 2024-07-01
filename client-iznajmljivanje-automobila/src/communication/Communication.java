@@ -8,6 +8,7 @@ import domain.Klijent;
 import domain.Korisnik;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import ui.coordinator.ClientCoordinator;
 import ui.forms.util.Constants;
 
@@ -66,4 +67,45 @@ public class Communication {
             throw response.getException();
         }
     }
+    
+    public List<Klijent> nadjiKlijente(Klijent klijentNadji) throws Exception {
+        Request request = new Request(Operation.NADJI_KLIJENTE, klijentNadji);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            return (List<Klijent>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+    
+    public Klijent nadjiKlijenta(Klijent klijentUcitaj) throws Exception {
+        Request request = new Request(Operation.UCITAJ_KLIJENTA, klijentUcitaj);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            return  (Klijent) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+    
+    public void izmeniKlijenta(Klijent klijent) throws Exception {
+        Request request = new Request(Operation.ZAPAMTI_KLIJENTA, klijent);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }
+    
+    public void obrisiKlijenta(Klijent klijent) throws Exception {
+        Request request = new Request(Operation.OBRISI_KLIJENTA, klijent);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }
+
 }
