@@ -9,9 +9,11 @@ import java.util.Map;
 import ui.controller.KlijentController;
 import ui.controller.LoginController;
 import ui.controller.MainController;
+import ui.controller.PretragaKlijentaController;
 import ui.forms.KlijentForm;
 import ui.forms.LoginForm;
 import ui.forms.MainForm;
+import ui.forms.PretragaKlijentaForm;
 import ui.forms.util.FormMode;
 
 /**
@@ -60,5 +62,15 @@ public class ClientCoordinator {
     public void openAddKlijentForm() {
         KlijentController klijentController = new KlijentController(new KlijentForm(mainController.getFrmMain(), true));
         klijentController.openForm(FormMode.ADD);
+    }
+    
+    public void openPretragaKlijentForm() {
+        PretragaKlijentaController pretragaKlijentaController = new PretragaKlijentaController(new PretragaKlijentaForm(mainController.getFrmMain(), true));
+        pretragaKlijentaController.openForm();
+    }
+
+    public void openEditKlijentForm(PretragaKlijentaForm frmPretragaKlijenta) {
+        KlijentController klijentController = new KlijentController(new KlijentForm(frmPretragaKlijenta, true));
+        klijentController.openForm(FormMode.EDIT);
     }
 }

@@ -5,7 +5,6 @@
 package domain;
 
 import java.sql.ResultSet;
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +136,7 @@ public class Klijent implements AbstractDomainObject {
 
     @Override
     public String getUpdateQuery() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "ime=?, prezime=?, email=? ,adresa=?";
     }
 
     @Override
@@ -152,12 +151,34 @@ public class Klijent implements AbstractDomainObject {
     }
 
     @Override
-    public AbstractDomainObject getResult(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public AbstractDomainObject getResult(ResultSet resultSet) throws Exception {
+        AbstractDomainObject ado = null;
+        if (resultSet.next()) {
+            Long klijentId = resultSet.getLong("klijentId");
+            String ime = resultSet.getString("ime");
+            String email = resultSet.getString("email");
+            String prezime = resultSet.getString("prezime");
+            String adresa = resultSet.getString("adresa");
+
+            ado = new Klijent(klijentId, ime, prezime, email, adresa);
+        }
+        return ado;
     }
 
     @Override
     public String getCondition(AbstractDomainObject ado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Klijent k = (Klijent) ado;
+        
+        boolean hasIme = k.getIme() != null && !k.getIme().trim().isEmpty();
+        boolean hasPrezime = k.getPrezime() != null && !k.getPrezime().trim().isEmpty();
+        
+        if (hasIme && !hasPrezime) {
+            return "ime LIKE '%" + k.getIme() + "%'";
+        } 
+        if (!hasIme && hasPrezime) {
+            return "prezime LIKE '%" + k.getPrezime() + "%'";
+        }
+        
+        return "ime LIKE '%" + k.getIme() + "%' AND prezime LIKE '%" + k.getPrezime() + "%'";
     }
 }

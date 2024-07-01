@@ -72,6 +72,13 @@ public class MainController {
             }
         });
         
+        frmMain.jmiPretraziKlijentaAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClientCoordinator.getInstance().openPretragaKlijentForm();
+            }
+        });
+        
 //        frmMain.jmiDodajAutomobilAddActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {

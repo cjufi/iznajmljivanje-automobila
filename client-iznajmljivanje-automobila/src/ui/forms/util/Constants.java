@@ -11,5 +11,7 @@ package ui.forms.util;
 public class Constants {
     
     public static final String KORISNIK = "KORISNIK";
+    public static final String KLIJENT = "KLIJENT";
+    public static final String KLIJENT_RED = "KLIJENT_RED";
     
 }

@@ -11,8 +11,8 @@ import operation.AbstractSO;
  *
  * @author Filip
  */
-public class KreirajKlijenta extends AbstractSO {
-
+public class ObrisiKlijenta extends AbstractSO {
+    
     @Override
     protected void preconditions(Object param) throws Exception {
         if(param == null || !(param instanceof Klijent)) {
@@ -23,6 +23,6 @@ public class KreirajKlijenta extends AbstractSO {
     @Override
     protected void executeOperation(Object param) throws Exception {
         Klijent k = (Klijent) param;
-        repository.dodaj(k);
+        repository.obrisi(k);
     }
 }
