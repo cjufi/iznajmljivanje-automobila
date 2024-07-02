@@ -170,7 +170,7 @@ public class AutomobilForm extends javax.swing.JDialog {
         return btnSacuvaj;
     }
 
-    public JComboBox<String> getCbTipAutomobila() {
+    public JComboBox getCbTipAutomobila() {
         return cbTipAutomobila;
     }
 

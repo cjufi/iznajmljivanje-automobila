@@ -6,13 +6,17 @@ package ui.coordinator;
 
 import java.util.HashMap;
 import java.util.Map;
+import ui.controller.AutomobilController;
 import ui.controller.KlijentController;
 import ui.controller.LoginController;
 import ui.controller.MainController;
+import ui.controller.PretragaAutomobilaController;
 import ui.controller.PretragaKlijentaController;
+import ui.forms.AutomobilForm;
 import ui.forms.KlijentForm;
 import ui.forms.LoginForm;
 import ui.forms.MainForm;
+import ui.forms.PretragaAutomobilaForm;
 import ui.forms.PretragaKlijentaForm;
 import ui.forms.util.FormMode;
 
@@ -72,5 +76,20 @@ public class ClientCoordinator {
     public void openEditKlijentForm(PretragaKlijentaForm frmPretragaKlijenta) {
         KlijentController klijentController = new KlijentController(new KlijentForm(frmPretragaKlijenta, true));
         klijentController.openForm(FormMode.EDIT);
+    }
+    
+    public void openAddAutomobilForm() {
+        AutomobilController automobilController = new AutomobilController(new AutomobilForm(mainController.getFrmMain(), true));
+        automobilController.openForm(FormMode.ADD);
+    }
+    
+    public void openPretragaAutomobilForm() {
+        PretragaAutomobilaController pretragaAutomobilaController = new PretragaAutomobilaController(new PretragaAutomobilaForm(mainController.getFrmMain(), true));
+        pretragaAutomobilaController.openForm();
+    }
+
+    public void openEditAutomobilForm(PretragaAutomobilaForm frmPretragaAutomobil) {
+        AutomobilController automobilController = new AutomobilController(new AutomobilForm(frmPretragaAutomobil, true));
+        automobilController.openForm(FormMode.EDIT);
     }
 }

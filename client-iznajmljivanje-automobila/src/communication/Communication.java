@@ -4,6 +4,7 @@
  */
 package communication;
 
+import domain.Automobil;
 import domain.Klijent;
 import domain.Korisnik;
 import java.io.IOException;
@@ -107,5 +108,65 @@ public class Communication {
             throw response.getException();
         }
     }
-
+    
+    public void kreirajAutomobil(Automobil automobil) throws Exception {
+        Request request = new Request(Operation.KREIRAJ_AUTOMOBIL, automobil);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException() != null) {
+            throw response.getException();
+        }
+    }
+    
+    public List<Automobil> nadjiAutomobile(Automobil automobil) throws Exception {
+        Request request = new Request(Operation.NADJI_AUTOMOBILE, automobil);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException() == null) {
+            return (List<Automobil>) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public Automobil nadjiAutomobil(Automobil automobil) throws Exception {
+        Request request = new Request(Operation.UCITAJ_AUTOMOBIL, automobil);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            return  (Automobil) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+    
+    public void izmeniAutomobil(Automobil automobil) throws Exception {
+        Request request = new Request(Operation.ZAPAMTI_AUTOMOBIL, automobil);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }
+    
+    public void obrisiAutomobil(Automobil automobil) throws Exception {
+        Request request = new Request(Operation.OBRISI_AUTOMOBIL, automobil);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }
+    
+    public List<Automobil> ucitajListuAutomobila() throws Exception {
+        Request request = new Request(Operation.UCITAJ_LISTU_AUTOMOBILA, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<Automobil>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
 }

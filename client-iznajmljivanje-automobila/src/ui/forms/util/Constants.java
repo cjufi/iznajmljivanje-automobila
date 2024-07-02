@@ -12,6 +12,7 @@ public class Constants {
     
     public static final String KORISNIK = "KORISNIK";
     public static final String KLIJENT = "KLIJENT";
-    public static final String KLIJENT_RED = "KLIJENT_RED";
-    
+    public static final String KLIJENT_RED = "KLIJENT_RED";   
+    public static final String AUTOMOBIL = "AUTOMOBIL";
+    public static final String AUTOMOBIL_RED = "AUTOMOBIL_RED";
 }
