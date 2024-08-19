@@ -117,21 +117,20 @@ public class StavkaAutomobila implements AbstractDomainObject {
 
     @Override
     public String getAttributeNames() {
-        return "stavkaId,registracioniBroj,naziv,servisId";
+        return "registracioniBroj,naziv,servisId";
     }
 
     @Override
     public String getUnknownValues() {
-        return "?,?,?,?";
+        return "?,?,?";
     }
 
     @Override
     public void prepareStatement(PreparedStatement ps, AbstractDomainObject ado) throws Exception {
         StavkaAutomobila sa = (StavkaAutomobila) ado;
-        ps.setLong(1, sa.getStavkaId());
-        ps.setString(2, sa.getAutomobil().getRegistracioniBroj());
-        ps.setString(3, sa.getNaziv());
-        ps.setLong(4, sa.getServis().getServisId());
+        ps.setString(1, sa.getAutomobil().getRegistracioniBroj());
+        ps.setString(2, sa.getNaziv());
+        ps.setLong(3, sa.getServis().getServisId());
     }
 
     @Override

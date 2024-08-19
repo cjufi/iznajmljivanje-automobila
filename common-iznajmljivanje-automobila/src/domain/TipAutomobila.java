@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package domain;
 
 import java.sql.ResultSet;
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +10,7 @@ import java.util.Objects;
  *
  * @author Filip
  */
-public class TipAutomobila implements Serializable, AbstractDomainObject {
+public class TipAutomobila implements AbstractDomainObject {
     
     private Long tipId;
     private String naziv;
@@ -62,9 +57,14 @@ public class TipAutomobila implements Serializable, AbstractDomainObject {
             return false;
         }
         final TipAutomobila other = (TipAutomobila) obj;
-        return Objects.equals(this.tipId, other.tipId);
+        return Objects.equals(this.naziv, other.naziv);
     }
 
+    @Override
+    public String toString() {
+        return naziv;
+    }
+    
     @Override
     public String getTableName() {
         return "tipautomobila";
@@ -75,11 +75,11 @@ public class TipAutomobila implements Serializable, AbstractDomainObject {
         List<AbstractDomainObject> list = new ArrayList<>();
         
         while(rs.next()) {
-        Long tipId = rs.getLong("tipId");
-        String naziv = rs.getString("naziv");
+            Long tipId = rs.getLong("tipId");
+            String naziv = rs.getString("naziv");
         
-        TipAutomobila ta = new TipAutomobila(tipId, naziv);
-        list.add(ta);
+            TipAutomobila ta = new TipAutomobila(tipId, naziv);
+            list.add(ta);
         }
         return list;
     }
@@ -102,7 +102,7 @@ public class TipAutomobila implements Serializable, AbstractDomainObject {
 
     @Override
     public String getUpdateQuery() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "naziv=?";
     }
 
     @Override
@@ -113,16 +113,24 @@ public class TipAutomobila implements Serializable, AbstractDomainObject {
 
     @Override
     public String getOrderCondition() {
-        return "tipId";
+        return "naziv";
     }
 
     @Override
     public AbstractDomainObject getResult(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        AbstractDomainObject ado = null;
+        if (rs.next()) {
+            Long tipId = rs.getLong("tipId");
+            String naziv = rs.getString("naziv");
+
+            ado = new TipAutomobila(tipId, naziv);
+        }
+        return ado;
     }
 
     @Override
     public String getCondition(AbstractDomainObject ado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        TipAutomobila tp = (TipAutomobila) ado;
+        return "naziv LIKE '%" + tp.getNaziv() + "%'";
     }
 }

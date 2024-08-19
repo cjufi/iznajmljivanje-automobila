@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
 package communication;
 
 /**
@@ -25,7 +21,10 @@ public enum Operation {
     NADJI_UVERENJA,
     UCITAJ_UVERENJE,
     ZAPAMTI_UVERENJE,
+    UCITAJ_LISTU_KLIJENATA,
     KREIRAJ_STAVKU_AUTOMOBILA,
-    UCITAJ_LISTU_AUTOMOBILA
+    UCITAJ_LISTU_AUTOMOBILA,
+    UCITAJ_LISTU_TIPOVA_AUTOMOBILA,
+    UCITAJ_LISTU_SERVISA
 }
                                          

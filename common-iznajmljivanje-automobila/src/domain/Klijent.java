@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package domain;
 
 import java.sql.ResultSet;
@@ -92,6 +88,11 @@ public class Klijent implements AbstractDomainObject {
         }
         final Klijent other = (Klijent) obj;
         return Objects.equals(this.email, other.email);
+    }
+
+    @Override
+    public String toString() {
+        return ime + " " + prezime + " email=" + email + " adresa=" + adresa;
     }
 
     @Override

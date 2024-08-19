@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package domain;
 
 import java.sql.ResultSet;
@@ -23,19 +19,17 @@ public class Uverenje implements AbstractDomainObject {
     private Date datumDo;
     private Automobil automobil;
     private Klijent klijent;
-    private Korisnik korisnik;
 
     public Uverenje() {
     }
 
-    public Uverenje(Long uverenjeId, double cena, Date datumOd, Date datumDo, Automobil automobil, Klijent klijent, Korisnik korisnik) {
+    public Uverenje(Long uverenjeId, double cena, Date datumOd, Date datumDo, Automobil automobil, Klijent klijent) {
         this.uverenjeId = uverenjeId;
         this.cena = cena;
         this.datumOd = datumOd;
         this.datumDo = datumDo;
         this.automobil = automobil;
         this.klijent = klijent;
-        this.korisnik = korisnik;
     }
 
     public Long getUverenjeId() {
@@ -86,17 +80,9 @@ public class Uverenje implements AbstractDomainObject {
         this.klijent = klijent;
     }
 
-    public Korisnik getKorisnik() {
-        return korisnik;
-    }
-
-    public void setKorisnik(Korisnik korisnik) {
-        this.korisnik = korisnik;
-    }
-
     @Override
     public String toString() {
-        return "Uverenje{" + "uverenjeId=" + uverenjeId + ", cena=" + cena + ", datumOd=" + datumOd + ", datumDo=" + datumDo + ", automobil=" + automobil + ", klijent=" + klijent + ", korisnik=" + korisnik + '}';
+        return "Uverenje{" + "uverenjeId=" + uverenjeId + ", cena=" + cena + ", datumOd=" + datumOd + ", datumDo=" + datumDo + ", automobil=" + automobil + ", klijent=" + klijent + '}';
     }
 
     @Override
@@ -135,7 +121,6 @@ public class Uverenje implements AbstractDomainObject {
             Double cena = resultSet.getDouble("cena");
             String registracioniBroj = resultSet.getString("registracioniBroj");
             Long klijentId = resultSet.getLong("klijentId");
-            Long korisnikId = resultSet.getLong("korisnikId");
 
             Automobil a = new Automobil();
             a.setRegistracioniBroj(registracioniBroj);
@@ -143,10 +128,8 @@ public class Uverenje implements AbstractDomainObject {
             Klijent kl = new Klijent();
             kl.setKlijentId(klijentId);
             
-            Korisnik ko = new Korisnik();
-            ko.setKorisnikId(korisnikId);
 
-            Uverenje u = new Uverenje(uverenjeId, cena, datumOd, datumDo, a, kl, ko);
+            Uverenje u = new Uverenje(uverenjeId, cena, datumOd, datumDo, a, kl);
             
             list.add(u);
         }
@@ -155,29 +138,27 @@ public class Uverenje implements AbstractDomainObject {
 
     @Override
     public String getAttributeNames() {
-        return "uverenjeId, datumOd, datumDo, cena, registracioniBroj, klijentId, korisnikId";
+        return "datumOd, datumDo, cena, registracioniBroj, klijentId";
     }
 
     @Override
     public String getUnknownValues() {
-        return "?,?,?,?,?,?,?";
+        return "?,?,?,?,?";
     }
 
     @Override
     public void prepareStatement(PreparedStatement ps, AbstractDomainObject ado) throws Exception {
         Uverenje u = (Uverenje) ado;
-        ps.setLong(1, u.getUverenjeId());
-        ps.setDate(2, (java.sql.Date) u.getDatumOd());
-        ps.setDate(3, (java.sql.Date) u.getDatumDo());
-        ps.setDouble(4, u.getCena());
-        ps.setString(5, u.getAutomobil().getRegistracioniBroj());
-        ps.setLong(6, u.getKlijent().getKlijentId());
-        ps.setLong(7, u.getKorisnik().getKorisnikId());
+        ps.setDate(1, (java.sql.Date) u.getDatumOd());
+        ps.setDate(2, (java.sql.Date) u.getDatumDo());
+        ps.setDouble(3, u.getCena());
+        ps.setString(4, u.getAutomobil().getRegistracioniBroj());
+        ps.setLong(5, u.getKlijent().getKlijentId());
     }
 
     @Override
     public String getUpdateQuery() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "datumOd=?, datumDo=?, cena=?, registracioniBroj=?, klijentId=?";
     }
 
     @Override
@@ -192,12 +173,31 @@ public class Uverenje implements AbstractDomainObject {
     }
 
     @Override
-    public AbstractDomainObject getResult(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public AbstractDomainObject getResult(ResultSet resultSet) throws Exception {
+        AbstractDomainObject ado = null;
+        if(resultSet.next()) {
+            Long uverenjeId = resultSet.getLong("uverenjeId");
+            Double cena = resultSet.getDouble("cena");
+            Date datumOd = resultSet.getDate("datumOd");
+            Date datumDo = resultSet.getDate("datumDo");
+            String registracioniBroj = resultSet.getString("registracioniBroj");
+            Long klijentId = resultSet.getLong("klijentId");
+            
+            Automobil a = new Automobil();
+            a.setRegistracioniBroj(registracioniBroj);
+            
+            Klijent k = new Klijent();
+            k.setKlijentId(klijentId);
+            
+            ado = new Uverenje(uverenjeId, cena, datumOd, datumDo, a, k);
+        }
+        
+        return ado;
     }
 
     @Override
     public String getCondition(AbstractDomainObject ado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Uverenje uverenje = (Uverenje) ado;
+        return "registracioniBroj LIKE '%" + uverenje.getAutomobil().getRegistracioniBroj()+ "%'";
     }
 }
