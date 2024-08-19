@@ -1,24 +1,24 @@
-package operation.klijent;
+package operation.automobil;
 
-import domain.Klijent;
+import domain.Automobil;
 import operation.AbstractSO;
 
 /**
  *
  * @author Filip
  */
-public class KreirajKlijenta extends AbstractSO {
+public class ObrisiAutomobil extends AbstractSO {
 
     @Override
     protected void preconditions(Object param) throws Exception {
-        if(param == null || !(param instanceof Klijent)) {
+        if(param == null || !(param instanceof Automobil)) {
             throw new Exception("Invalid parameter");
         }
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        Klijent k = (Klijent) param;
-        repository.dodaj(k);
+        Automobil a = (Automobil) param;
+        repository.obrisi(a);
     }
 }

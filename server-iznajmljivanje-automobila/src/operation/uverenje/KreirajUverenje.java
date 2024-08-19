@@ -1,24 +1,24 @@
-package operation.klijent;
+package operation.uverenje;
 
-import domain.Klijent;
+import domain.Uverenje;
 import operation.AbstractSO;
 
 /**
  *
  * @author Filip
  */
-public class KreirajKlijenta extends AbstractSO {
-
+public class KreirajUverenje extends AbstractSO {
+    
     @Override
     protected void preconditions(Object param) throws Exception {
-        if(param == null || !(param instanceof Klijent)) {
+        if(param == null || !(param instanceof Uverenje)) {
             throw new Exception("Invalid parameter");
-        }
+        }        
     }
 
     @Override
     protected void executeOperation(Object param) throws Exception {
-        Klijent k = (Klijent) param;
-        repository.dodaj(k);
+        Uverenje uverenje = (Uverenje) param;
+        repository.dodaj(uverenje);
     }
 }
