@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ui.controller;
 
 import domain.Korisnik;
@@ -79,19 +75,40 @@ public class MainController {
             }
         });
         
-//        frmMain.jmiDodajAutomobilAddActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                ClientCoordinator.getInstance().openAddAutomobilForm();
-//            }
-//        });
-//        
-//        frmMain.jmiPretraziAutomobilAddActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                ClientCoordinator.getInstance().openPretragaAutomobilaForm();
-//            }
-//        });
+        frmMain.jmiDodajAutomobilAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClientCoordinator.getInstance().openAddAutomobilForm();
+            }
+        });
+        
+        frmMain.jmiPretraziAutomobilAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClientCoordinator.getInstance().openPretragaAutomobilForm();
+            }
+        });
+        
+        frmMain.jmiDodajUverenjeAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClientCoordinator.getInstance().openAddUverenjeForm();
+            }
+        });
+        
+        frmMain.jmiPretraziUverenjeAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClientCoordinator.getInstance().openPretragaUverenjaForm();
+            }
+        });
+        
+        frmMain.jmiDodajStavkuAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ClientCoordinator.getInstance().openAddStavkuForm();
+            }
+        });
     }
     
     public MainForm getFrmMain() {

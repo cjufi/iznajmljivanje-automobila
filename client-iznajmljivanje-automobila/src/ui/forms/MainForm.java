@@ -42,6 +42,8 @@ public class MainForm extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jmiDodajUverenje = new javax.swing.JMenuItem();
         jmiPretraziUverenje = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jmiDodajStavku = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +87,13 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu4.setText("Servis");
+
+        jmiDodajStavku.setText("Dodaj Stavku");
+        jMenu4.add(jmiDodajStavku);
+
+        jMenuBar1.add(jMenu4);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -123,9 +132,11 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jmiDodajAutomobil;
     private javax.swing.JMenuItem jmiDodajKlijenta;
+    private javax.swing.JMenuItem jmiDodajStavku;
     private javax.swing.JMenuItem jmiDodajUverenje;
     private javax.swing.JMenuItem jmiPretraziAutomobil;
     private javax.swing.JMenuItem jmiPretraziKlijenta;
@@ -167,5 +178,9 @@ public class MainForm extends javax.swing.JFrame {
     
     public void jmiPretraziUverenjeAddActionListener(ActionListener actionListener){
         jmiPretraziUverenje.addActionListener(actionListener);
+    }
+    
+    public void jmiDodajStavkuAddActionListener(ActionListener actionListener){
+        jmiDodajStavku.addActionListener(actionListener);
     }
 }

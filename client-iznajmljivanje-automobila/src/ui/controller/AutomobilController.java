@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ui.controller;
 
 import communication.Communication;
@@ -50,9 +46,9 @@ public class AutomobilController {
                         JOptionPane.showMessageDialog(automobilForm, "Nisu uneti svi podaci", "Automobil greška", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-//                    if (!validateForm()) {
-//                        return;
-//                    }
+                    if (!validateForm()) {
+                        return;
+                    }
                     Automobil automobil = new Automobil();
                     automobil.setRegistracioniBroj(automobilForm.getTxtRegistracioniBroj().getText().trim());
                     automobil.setMarka(automobilForm.getTxtMarka().getText().trim());
@@ -76,6 +72,7 @@ public class AutomobilController {
                 automobilForm.getBtnSacuvaj().setEnabled(false);
                 automobilForm.getBtnOmoguciIzmenu().setEnabled(false);
                 automobilForm.getBtnIzmeni().setEnabled(true);
+                automobilForm.getBtnObrisi().setEnabled(false);
                 automobilForm.getTxtRegistracioniBroj().setEnabled(false);
                 automobilForm.getTxtMarka().setEnabled(true);
                 automobilForm.getTxtModel().setEnabled(true);
@@ -92,13 +89,13 @@ public class AutomobilController {
             private void update() {
                 try {
                     if (automobilForm.getTxtMarka().getText().isEmpty() || automobilForm.getTxtModel().getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(automobilForm, "Sistem ne može da zapamti poziciju.", "Automobil greška", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(automobilForm, "Sistem ne može da zapamti automobil.", "Automobil greška", JOptionPane.ERROR_MESSAGE);
                         JOptionPane.showMessageDialog(automobilForm, "Nisu uneti svi podaci", "Automobil greška", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-//                    if (!validateForm()) {
-//                        return;
-//                    }
+                    if (!validateForm()) {
+                        return;
+                    }
                     Automobil automobil = new Automobil();
                     automobil.setRegistracioniBroj(((Automobil) ClientCoordinator.getInstance().getParam(Constants.AUTOMOBIL)).getRegistracioniBroj());
                     automobil.setMarka(automobilForm.getTxtMarka().getText().trim());
@@ -117,7 +114,27 @@ public class AutomobilController {
                 }
             }
         });
-
+        
+        automobilForm.btnObrisiAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                delete();
+            }
+            
+            private void delete() {
+                try {
+                    Communication.getInstance().obrisiAutomobil((Automobil) ClientCoordinator.getInstance().getParam(Constants.AUTOMOBIL));
+                    JOptionPane.showMessageDialog(automobilForm, "Sistem je obrisao automobil", "Brisanje automobila", JOptionPane.INFORMATION_MESSAGE);
+                    automobilForm.dispose();
+                    PretragaAutomobilaForm frmPretragaAutomobila = (PretragaAutomobilaForm) automobilForm.getParent();
+                    AutomobilTableModel atm = (AutomobilTableModel) frmPretragaAutomobila.getjTable1().getModel();
+                    atm.obrisiAutomobil((Automobil) ClientCoordinator.getInstance().getParam(Constants.AUTOMOBIL));
+                } catch (Exception ex) {
+                    Logger.getLogger(AutomobilController.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(automobilForm, "Sistem ne može da obriše automobil", "Automobil greška", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     private void setMode(FormMode formMode) {
@@ -164,12 +181,11 @@ public class AutomobilController {
                             throw new Exception();
                         }
                     } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(automobilForm, "Sistem ne može da učita automobil");
+                        JOptionPane.showMessageDialog(automobilForm, "Sistem ne može da učita automobil", "Automobil greska",JOptionPane.ERROR_MESSAGE);
                         automobilForm.dispose();
                     }
-                    JOptionPane.showMessageDialog(automobilForm, "Sistem je učitao automobil");
+                        JOptionPane.showMessageDialog(automobilForm, "Sistem je učitao automobil");
                 }
-
             });
         }
 
@@ -190,17 +206,16 @@ public class AutomobilController {
 
     private void populateCbTipAutomobila() throws Exception {
         automobilForm.getCbTipAutomobila().removeAllItems();
-        List<Automobil> automobili = Communication.getInstance().ucitajListuAutomobila();
+        List<TipAutomobila> automobili = Communication.getInstance().ucitajListuTipovaAutomobila();
         automobilForm.getCbTipAutomobila().setModel(new DefaultComboBoxModel<>(automobili.toArray()));
     }
 
-//    private boolean validateForm() {
-//        boolean signal = true;
-//        try {
-//            double plata = Double.parseDouble(automobilForm.getTxtPlata().getText().trim());
-//        } catch (NumberFormatException ex) {
-//            JOptionPane.showMessageDialog(automobilForm, "Plata mora biti broj", "Plata greška", JOptionPane.ERROR_MESSAGE);
-//        }
-//        return signal;
-//    }
+    private boolean validateForm() {
+        String registracioniBroj = automobilForm.getTxtRegistracioniBroj().getText().trim();
+        if(registracioniBroj.length() != 7) {
+            JOptionPane.showMessageDialog(automobilForm, "Registracioni broj mora imati tacno 7 karaktera", "Registracioni broj greška", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 }

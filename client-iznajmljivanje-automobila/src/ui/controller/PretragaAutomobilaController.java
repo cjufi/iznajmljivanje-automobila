@@ -1,6 +1,8 @@
 package ui.controller;
 
+import communication.Communication;
 import domain.Automobil;
+import domain.TipAutomobila;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -53,9 +55,16 @@ public class PretragaAutomobilaController {
                         frmPretragaAutomobila.getTxtRegistracioniBroj().setText("");
                         return;
                     }
-                    JOptionPane.showMessageDialog(frmPretragaAutomobila, "Sistem je našao automobila po zadatoj vrednosti");
-                    System.out.println(automobili);
+                    JOptionPane.showMessageDialog(frmPretragaAutomobila, "Sistem je našao automobile po zadatoj vrednosti");
                     atm = (AutomobilTableModel) frmPretragaAutomobila.getjTable1().getModel();
+                    List<TipAutomobila> tipoviAutomobila = Communication.getInstance().ucitajListuTipovaAutomobila();
+                    for (TipAutomobila ta : tipoviAutomobila) {
+                        for (Automobil auto : automobili) {
+                            if (auto.getTipAutomobila().getTipId().equals(ta.getTipId())) {
+                                auto.setTipAutomobila(ta);
+                            }
+                        }
+                    }                    
                     atm.setAutomobili(automobili);
                     frmPretragaAutomobila.getTxtRegistracioniBroj().setText("");
                 } catch (Exception ex) {

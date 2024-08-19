@@ -7,6 +7,10 @@ package communication;
 import domain.Automobil;
 import domain.Klijent;
 import domain.Korisnik;
+import domain.Servis;
+import domain.StavkaAutomobila;
+import domain.TipAutomobila;
+import domain.Uverenje;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
@@ -159,12 +163,95 @@ public class Communication {
         }
     }
     
+    public List<TipAutomobila> ucitajListuTipovaAutomobila() throws Exception {
+        Request request = new Request(Operation.UCITAJ_LISTU_TIPOVA_AUTOMOBILA, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<TipAutomobila>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+    
+    public void kreirajUverenje(Uverenje uverenje) throws Exception {
+        Request request = new Request(Operation.KREIRAJ_UVERENJE, uverenje);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException() != null) {
+            throw response.getException();
+        }
+    }
+    
+    public List<Uverenje> nadjiUverenja(Uverenje uverenje) throws Exception {
+        Request request = new Request(Operation.NADJI_UVERENJA, uverenje);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException() == null) {
+            return (List<Uverenje>) response.getResult();
+        }
+        else {
+            throw response.getException();
+        }
+    }
+    
+    public Uverenje nadjiUverenje(Uverenje uverenje) throws Exception {
+        Request request = new Request(Operation.UCITAJ_UVERENJE, uverenje);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            return  (Uverenje) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+    
+    public void izmeniUverenje(Uverenje uverenje) throws Exception {
+        Request request = new Request(Operation.ZAPAMTI_UVERENJE, uverenje);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }    
+    
+    public List<Klijent> ucitajListuKlijenata() throws Exception {
+        Request request = new Request(Operation.UCITAJ_LISTU_KLIJENATA, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<Klijent>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+    
     public List<Automobil> ucitajListuAutomobila() throws Exception {
         Request request = new Request(Operation.UCITAJ_LISTU_AUTOMOBILA, null);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if (response.getException() == null) {
             return (List<Automobil>) response.getResult();
+        } else {
+            throw response.getException();
+        }
+    }
+    
+    public void kreirajStavku(StavkaAutomobila sa) throws Exception {
+        Request request = new Request(Operation.KREIRAJ_STAVKU_AUTOMOBILA, sa);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException() != null) {
+            throw response.getException();
+        }
+    }
+
+    public List<Servis> ucitajListuServisa() throws Exception {
+        Request request = new Request(Operation.UCITAJ_LISTU_SERVISA, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return (List<Servis>) response.getResult();
         } else {
             throw response.getException();
         }

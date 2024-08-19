@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ui.controller;
 
 import communication.Communication;
@@ -49,10 +45,9 @@ public class KlijentController {
                         return;
                     }
                     
-//                    validacija treba na serveru
-//                    if (!validateForm()) {
-//                        return;
-//                    }
+                    if (!validateForm()) {
+                        return;
+                    }
                     Klijent klijent = new Klijent();
                     klijent.setIme(frmKlijent.getTxtIme().getText().trim());
                     klijent.setEmail(frmKlijent.getTxtEmail().getText().trim());
@@ -113,9 +108,9 @@ public class KlijentController {
 
             private void update() {
                 try {
-//                    if (!validateForm()) {
-//                        return;
-//                    }
+                    if (!validateForm()) {
+                        return;
+                    }
                     Klijent klijent = new Klijent();
                     klijent.setKlijentId(((Klijent) ClientCoordinator.getInstance().getParam(Constants.KLIJENT)).getKlijentId());
                     klijent.setIme(frmKlijent.getTxtIme().getText().trim());
@@ -200,5 +195,14 @@ public class KlijentController {
             default:
                 break;
         }
+    }
+    
+    private boolean validateForm() {
+        String email = frmKlijent.getTxtEmail().getText().trim();
+        if(!email.contains("@")) {
+            JOptionPane.showMessageDialog(frmKlijent, "Email mora sadrzati znak @ da bi bio validan", "Email greška", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 }

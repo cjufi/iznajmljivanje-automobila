@@ -27,6 +27,7 @@ public class AutomobilTableModel extends AbstractTableModel {
 
     public void setAutomobili(List<Automobil> automobili) {
         this.automobili = automobili;
+        fireTableDataChanged();
     }
     
     @Override
