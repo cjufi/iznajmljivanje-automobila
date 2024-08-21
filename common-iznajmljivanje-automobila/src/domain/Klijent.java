@@ -182,4 +182,9 @@ public class Klijent implements AbstractDomainObject {
         
         return "ime LIKE '%" + k.getIme() + "%' AND prezime LIKE '%" + k.getPrezime() + "%'";
     }
+
+    @Override
+    public void setID(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

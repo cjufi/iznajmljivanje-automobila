@@ -133,4 +133,9 @@ public class TipAutomobila implements AbstractDomainObject {
         TipAutomobila tp = (TipAutomobila) ado;
         return "naziv LIKE '%" + tp.getNaziv() + "%'";
     }
+
+    @Override
+    public void setID(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

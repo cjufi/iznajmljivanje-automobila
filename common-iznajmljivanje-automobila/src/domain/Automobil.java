@@ -166,4 +166,9 @@ public class Automobil implements AbstractDomainObject {
         Automobil a = (Automobil) ado;
         return "registracioniBroj LIKE '%" + a.getRegistracioniBroj()+ "%'";
     }
+
+    @Override
+    public void setID(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -30,4 +30,6 @@ public interface AbstractDomainObject extends Serializable {
     public AbstractDomainObject getResult(ResultSet rs)throws Exception;
     
     public String getCondition(AbstractDomainObject ado);
+    
+    void setID(Long id);
 }

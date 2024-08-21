@@ -4,7 +4,6 @@
  */
 package domain;
 
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -178,5 +177,10 @@ public class InterakcijaKlijentAutomobil implements AbstractDomainObject {
         }
 
         return cond;        
+    }
+
+    @Override
+    public void setID(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
