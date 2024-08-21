@@ -9,7 +9,6 @@ import ui.controller.MainController;
 import ui.controller.PretragaAutomobilaController;
 import ui.controller.PretragaKlijentaController;
 import ui.controller.PretragaUverenjaController;
-import ui.controller.StavkaController;
 import ui.controller.UverenjeController;
 import ui.forms.AutomobilForm;
 import ui.forms.KlijentForm;
@@ -18,7 +17,6 @@ import ui.forms.MainForm;
 import ui.forms.PretragaAutomobilaForm;
 import ui.forms.PretragaKlijentaForm;
 import ui.forms.PretragaUverenjaForm;
-import ui.forms.StavkaAutaForm;
 import ui.forms.UverenjeForm;
 import ui.forms.util.FormMode;
 
@@ -108,10 +106,5 @@ public class ClientCoordinator {
     public void openEditUverenjeForm(PretragaUverenjaForm frmPretragaUverenja) {
         UverenjeController uverenjeController = new UverenjeController(new UverenjeForm(frmPretragaUverenja, true));
         uverenjeController.openForm(FormMode.EDIT);
-    }
-    
-    public void openAddStavkuForm() {
-        StavkaController stavkaController = new StavkaController(new StavkaAutaForm(mainController.getFrmMain(), true));
-        stavkaController.openForm(FormMode.ADD);
     }
 }

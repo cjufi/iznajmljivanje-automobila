@@ -102,13 +102,6 @@ public class MainController {
                 ClientCoordinator.getInstance().openPretragaUverenjaForm();
             }
         });
-        
-        frmMain.jmiDodajStavkuAddActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ClientCoordinator.getInstance().openAddStavkuForm();
-            }
-        });
     }
     
     public MainForm getFrmMain() {

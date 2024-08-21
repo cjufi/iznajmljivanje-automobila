@@ -1,14 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package communication;
 
 import domain.Automobil;
 import domain.Klijent;
 import domain.Korisnik;
-import domain.Servis;
-import domain.StavkaAutomobila;
+import domain.TerminVoznje;
 import domain.TipAutomobila;
 import domain.Uverenje;
 import java.io.IOException;
@@ -174,13 +169,14 @@ public class Communication {
         }
     }
     
-    public void kreirajUverenje(Uverenje uverenje) throws Exception {
+    public Uverenje kreirajUverenje(Uverenje uverenje) throws Exception {
         Request request = new Request(Operation.KREIRAJ_UVERENJE, uverenje);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException() != null) {
             throw response.getException();
         }
+        return (Uverenje) response.getResult();
     }
     
     public List<Uverenje> nadjiUverenja(Uverenje uverenje) throws Exception {
@@ -237,22 +233,40 @@ public class Communication {
         }
     }
     
-    public void kreirajStavku(StavkaAutomobila sa) throws Exception {
-        Request request = new Request(Operation.KREIRAJ_STAVKU_AUTOMOBILA, sa);
+        public void kreirajTermin(TerminVoznje termin) throws Exception {
+        Request request = new Request(Operation.KREIRAJ_TERMIN, termin);
         sender.send(request);
         Response response = (Response) receiver.receive();
-        if(response.getException() != null) {
+        if (response.getException() != null) {
             throw response.getException();
         }
     }
 
-    public List<Servis> ucitajListuServisa() throws Exception {
-        Request request = new Request(Operation.UCITAJ_LISTU_SERVISA, null);
+    public List<TerminVoznje> nadjiTermine(TerminVoznje terminNadji) throws Exception {
+        Request request = new Request(Operation.NADJI_TERMINE, terminNadji);
         sender.send(request);
         Response response = (Response) receiver.receive();
-        if (response.getException() == null) {
-            return (List<Servis>) response.getResult();
+        if(response.getException()==null){
+            return (List<TerminVoznje>) response.getResult();
         } else {
+            throw response.getException();
+        }
+    }
+
+    public void obrisiTermin(TerminVoznje termin) throws Exception {
+        Request request = new Request(Operation.OBRISI_TERMIN, termin);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
+            throw response.getException();
+        }
+    }
+
+    public void izmeniTermin(TerminVoznje termin) throws Exception {
+        Request request = new Request(Operation.ZAPAMTI_TERMIN, termin);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() != null) {
             throw response.getException();
         }
     }
