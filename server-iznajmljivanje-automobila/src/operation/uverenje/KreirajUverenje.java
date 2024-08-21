@@ -9,6 +9,8 @@ import operation.AbstractSO;
  */
 public class KreirajUverenje extends AbstractSO {
     
+    private Uverenje sacuvanoUverenje;
+    
     @Override
     protected void preconditions(Object param) throws Exception {
         if(param == null || !(param instanceof Uverenje)) {
@@ -19,6 +21,10 @@ public class KreirajUverenje extends AbstractSO {
     @Override
     protected void executeOperation(Object param) throws Exception {
         Uverenje uverenje = (Uverenje) param;
-        repository.dodaj(uverenje);
+        sacuvanoUverenje = (Uverenje) repository.dodajIVrati(uverenje);
+    }
+    
+    public Uverenje getUverenje() {
+        return sacuvanoUverenje;
     }
 }

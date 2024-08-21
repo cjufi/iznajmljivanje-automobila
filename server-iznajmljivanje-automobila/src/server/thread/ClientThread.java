@@ -9,8 +9,7 @@ import domain.AbstractDomainObject;
 import domain.Automobil;
 import domain.Klijent;
 import domain.Korisnik;
-import domain.Servis;
-import domain.StavkaAutomobila;
+import domain.TerminVoznje;
 import domain.TipAutomobila;
 import domain.Uverenje;
 import java.net.Socket;
@@ -140,8 +139,9 @@ public class ClientThread extends Thread {
                             break;
                         case KREIRAJ_UVERENJE:
                             Uverenje uverenje = (Uverenje) request.getArgument();
-                            Controller.getInstance().kreirajUverenje(uverenje);
+                            Uverenje sacuvanoUverenje = Controller.getInstance().kreirajUverenje(uverenje);
                             response.setUspesno(true);
+                            response.setResult(sacuvanoUverenje);
                             break;
                         case NADJI_UVERENJA:
                             Uverenje uverenjeNadji = (Uverenje) request.getArgument();
@@ -160,14 +160,26 @@ public class ClientThread extends Thread {
                             Controller.getInstance().izmeniUverenje(uverenjeIzmeni);
                             response.setUspesno(true);
                             break;
-                        case UCITAJ_LISTU_SERVISA:
-                            List<Servis> servisi = Controller.getInstance().ucitajListuServisa();
-                            response.setResult(servisi);
+                        case KREIRAJ_TERMIN:
+                            TerminVoznje tv = (TerminVoznje) request.getArgument();
+                            Controller.getInstance().kreirajTerminVoznje(tv);
                             response.setUspesno(true);
                             break;
-                        case KREIRAJ_STAVKU_AUTOMOBILA:
-                            StavkaAutomobila sa = (StavkaAutomobila) request.getArgument();
-                            Controller.getInstance().kreirajStavku(sa);
+                        case NADJI_TERMINE:
+                            TerminVoznje terminNadji = (TerminVoznje) request.getArgument();
+                            List<TerminVoznje> termini = Controller.getInstance().nadjiTerminVoznje(terminNadji);
+                            response.setResult(termini);
+                            response.setUspesno(true);
+                            break;
+                        case OBRISI_TERMIN:
+                            TerminVoznje terminObrisi = (TerminVoznje) request.getArgument();
+                            Controller.getInstance().obrisiTerminVoznje(terminObrisi);
+                            response.setUspesno(true);
+                            break;
+                        case ZAPAMTI_TERMIN:
+                            TerminVoznje terminIzmeni = (TerminVoznje) request.getArgument();
+                            System.out.println(terminIzmeni);
+                            Controller.getInstance().izmeniTerminVoznje(terminIzmeni);
                             response.setUspesno(true);
                             break;
                         default:

@@ -133,5 +133,27 @@ public class DbBroker implements DbRepository<AbstractDomainObject>{
             throw ex;
         }
         return ado1;
-    }    
+    }
+
+    @Override
+    public AbstractDomainObject dodajIVrati(AbstractDomainObject ado) throws Exception {
+        String query = "INSERT INTO " + ado.getTableName() + " (" + ado.getAttributeNames() + ") VALUES(" + ado.getUnknownValues() + ")";
+        try (PreparedStatement ps = DbConnectionFactory.getInstance().getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            ado.prepareStatement(ps, ado);
+            ps.executeUpdate();
+            
+            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    Long generatedId = generatedKeys.getLong(1);
+                    ado.setID(generatedId);
+                    return ado;
+                } else {
+                    throw new SQLException("Creating entity failed, no ID obtained.");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+    }
 }

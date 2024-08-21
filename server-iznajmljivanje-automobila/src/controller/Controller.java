@@ -4,8 +4,7 @@ import domain.AbstractDomainObject;
 import domain.Automobil;
 import domain.Klijent;
 import domain.Korisnik;
-import domain.Servis;
-import domain.StavkaAutomobila;
+import domain.TerminVoznje;
 import domain.TipAutomobila;
 import domain.Uverenje;
 import java.util.ArrayList;
@@ -24,8 +23,10 @@ import operation.klijent.ObrisiKlijenta;
 import operation.klijent.UcitajListuKlijenata;
 import operation.klijent.ZapamtiKlijenta;
 import operation.korisnik.LoginKorisnik;
-import operation.servis.UcitajListuServisa;
-import operation.stavkaautomobila.KreirajStavkuAutomobila;
+import operation.terminvoznje.KreirajTerminVoznje;
+import operation.terminvoznje.NadjiTermineVoznje;
+import operation.terminvoznje.ObrisiTerminVoznje;
+import operation.terminvoznje.ZapamtiTerminVoznje;
 import operation.tipautomobila.UcitajListuTipovaAutomobila;
 import operation.uverenje.KreirajUverenje;
 import operation.uverenje.NadjiUverenja;
@@ -165,9 +166,10 @@ public class Controller {
         return automobili;
     }
     
-    public void kreirajUverenje(Uverenje uverenje) throws Exception {
+    public Uverenje kreirajUverenje(Uverenje uverenje) throws Exception {
         AbstractSO operation = new KreirajUverenje();
         operation.execute(uverenje);
+        return ((KreirajUverenje) operation).getUverenje();
     }
     
     public List<Uverenje> nadjiUverenja(Uverenje uverenjeNadji) throws Exception {
@@ -188,16 +190,26 @@ public class Controller {
         AbstractSO operation = new ZapamtiUverenje();
         operation.execute(uverenje);
     }
-
-    public void kreirajStavku(StavkaAutomobila sa) throws Exception {
-        AbstractSO operation = new KreirajStavkuAutomobila();
-        operation.execute(sa);
+    
+    public void kreirajTerminVoznje(TerminVoznje tv) throws Exception {
+        AbstractSO operation = new KreirajTerminVoznje();
+        operation.execute(tv);
     }
     
-    public List<Servis> ucitajListuServisa() throws Exception {
-        AbstractSO operation = new UcitajListuServisa();
-        operation.execute(new Servis());
-        List<Servis> servisi = ((UcitajListuServisa) operation).getServisi();
-        return servisi;
+    public List<TerminVoznje> nadjiTerminVoznje(TerminVoznje terminNadji) throws Exception {
+        AbstractSO operation = new NadjiTermineVoznje();
+        operation.execute(terminNadji);
+        List<TerminVoznje> termini = ((NadjiTermineVoznje) operation).getTermineVoznje();
+        return termini;
+    }
+    
+    public void obrisiTerminVoznje(TerminVoznje terminObrisi) throws Exception {
+        AbstractSO operation = new ObrisiTerminVoznje();
+        operation.execute(terminObrisi);
+    }
+
+    public void izmeniTerminVoznje(TerminVoznje terminIzmeni) throws Exception {
+        AbstractSO operation = new ZapamtiTerminVoznje();
+        operation.execute(terminIzmeni);
     }
 }

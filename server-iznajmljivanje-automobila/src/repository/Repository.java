@@ -26,4 +26,6 @@ public interface Repository<T> {
     public List<T> filter(T param)throws Exception;
     
     public T nadji(T param) throws Exception;
+    
+    public T dodajIVrati(T param) throws Exception;
 }
