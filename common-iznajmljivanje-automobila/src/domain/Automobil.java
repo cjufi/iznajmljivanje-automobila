@@ -1,7 +1,6 @@
 package domain;
 
 import java.sql.ResultSet;
-import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.Objects;
  *
  * @author Filip
  */
-public class Automobil implements Serializable, AbstractDomainObject {
+public class Automobil implements AbstractDomainObject {
     
     private String registracioniBroj;
     private String marka;
@@ -80,6 +79,11 @@ public class Automobil implements Serializable, AbstractDomainObject {
         final Automobil other = (Automobil) obj;
         return Objects.equals(this.registracioniBroj, other.registracioniBroj);
     }
+
+    @Override
+    public String toString() {
+        return registracioniBroj + " " + marka + " " + model;
+    }
     
     @Override
     public String getTableName() {
@@ -131,7 +135,7 @@ public class Automobil implements Serializable, AbstractDomainObject {
     @Override
     public String getID(AbstractDomainObject ado) {
         Automobil a = (Automobil) ado;
-        return "registracioniBroj=" + a.getRegistracioniBroj();
+        return "registracioniBroj LIKE '%" + a.getRegistracioniBroj()+ "%'";
     }
 
     @Override
@@ -141,11 +145,30 @@ public class Automobil implements Serializable, AbstractDomainObject {
 
     @Override
     public AbstractDomainObject getResult(ResultSet resultSet) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        AbstractDomainObject ado = null;
+        if (resultSet.next()) {
+            String registracioniBroj = resultSet.getString("registracioniBroj");
+            String marka = resultSet.getString("marka");
+            String model = resultSet.getString("model");
+            Long tipId = resultSet.getLong("tipId");
+
+            TipAutomobila tp = new TipAutomobila();
+            tp.setTipId(tipId);
+            
+            ado = new Automobil(registracioniBroj, marka, model, tipAutomobila);
+        }
+        return ado;
     }
 
     @Override
     public String getCondition(AbstractDomainObject ado) {
+        Automobil a = (Automobil) ado;
+        return "registracioniBroj LIKE '%" + a.getRegistracioniBroj()+ "%'";
+    }
+
+    @Override
+    public void setID(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -5,6 +5,7 @@
 package server;
 
 import controller.Controller;
+import domain.Korisnik;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;

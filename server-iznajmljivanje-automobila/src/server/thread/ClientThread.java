@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package server.thread;
 
 import communication.Receiver;
@@ -10,8 +6,12 @@ import communication.Response;
 import communication.Sender;
 import controller.Controller;
 import domain.AbstractDomainObject;
+import domain.Automobil;
 import domain.Klijent;
 import domain.Korisnik;
+import domain.TerminVoznje;
+import domain.TipAutomobila;
+import domain.Uverenje;
 import java.net.Socket;
 import java.util.List;
 import server.Server;
@@ -93,6 +93,93 @@ public class ClientThread extends Thread {
                         case ZAPAMTI_KLIJENTA:
                             Klijent klijentIzmeni = (Klijent) request.getArgument();
                             Controller.getInstance().izmeniKlijenta(klijentIzmeni);
+                            response.setUspesno(true);
+                            break;
+                        case KREIRAJ_AUTOMOBIL:
+                            Automobil automobil = (Automobil) request.getArgument();
+                            Controller.getInstance().kreirajAutomobil(automobil);
+                            response.setUspesno(true);
+                            break;
+                        case NADJI_AUTOMOBILE:
+                            Automobil automobilNadji = (Automobil) request.getArgument();
+                            List<Automobil> automobili = Controller.getInstance().nadjiAutomobile(automobilNadji);
+                            response.setResult(automobili);
+                            response.setUspesno(true);
+                            break;
+                        case UCITAJ_AUTOMOBIL:
+                            Automobil automobilUcitaj = (Automobil) request.getArgument();
+                            Automobil automobilNadjen = Controller.getInstance().ucitajAutomobil(automobilUcitaj);
+                            response.setResult(automobilNadjen);
+                            response.setUspesno(true);
+                            break;
+                        case OBRISI_AUTOMOBIL:
+                            Automobil automobilObrisi = (Automobil) request.getArgument();
+                            Controller.getInstance().obrisiAutomobil(automobilObrisi);
+                            response.setUspesno(true);
+                            break;
+                        case ZAPAMTI_AUTOMOBIL:
+                            Automobil automobilIzmeni = (Automobil) request.getArgument();
+                            Controller.getInstance().izmeniAutomobil(automobilIzmeni);
+                            response.setUspesno(true);
+                            break;
+                        case UCITAJ_LISTU_TIPOVA_AUTOMOBILA:
+                            List<TipAutomobila> sviTipovi = Controller.getInstance().ucitajListuTipovaAutomobila();
+                            response.setResult(sviTipovi);
+                            response.setUspesno(true);
+                            break;
+                        case UCITAJ_LISTU_KLIJENATA:
+                            List<Klijent> sviKlijenti = Controller.getInstance().ucitajListuKlijenata();
+                            response.setResult(sviKlijenti);
+                            response.setUspesno(true);
+                            break;
+                        case UCITAJ_LISTU_AUTOMOBILA:
+                            List<Automobil> sviAutomobili = Controller.getInstance().ucitajListuAutomobila();
+                            response.setResult(sviAutomobili);
+                            response.setUspesno(true);
+                            break;
+                        case KREIRAJ_UVERENJE:
+                            Uverenje uverenje = (Uverenje) request.getArgument();
+                            Uverenje sacuvanoUverenje = Controller.getInstance().kreirajUverenje(uverenje);
+                            response.setUspesno(true);
+                            response.setResult(sacuvanoUverenje);
+                            break;
+                        case NADJI_UVERENJA:
+                            Uverenje uverenjeNadji = (Uverenje) request.getArgument();
+                            List<Uverenje> uverenja = Controller.getInstance().nadjiUverenja(uverenjeNadji);
+                            response.setResult(uverenja);
+                            response.setUspesno(true);
+                            break;
+                        case UCITAJ_UVERENJE:
+                            Uverenje uverenjeUcitaj = (Uverenje) request.getArgument();
+                            Uverenje uverenjeNadjen = Controller.getInstance().ucitajUverenje(uverenjeUcitaj);
+                            response.setResult(uverenjeNadjen);
+                            response.setUspesno(true);
+                            break;
+                        case ZAPAMTI_UVERENJE:
+                            Uverenje uverenjeIzmeni = (Uverenje) request.getArgument();
+                            Controller.getInstance().izmeniUverenje(uverenjeIzmeni);
+                            response.setUspesno(true);
+                            break;
+                        case KREIRAJ_TERMIN:
+                            TerminVoznje tv = (TerminVoznje) request.getArgument();
+                            Controller.getInstance().kreirajTerminVoznje(tv);
+                            response.setUspesno(true);
+                            break;
+                        case NADJI_TERMINE:
+                            TerminVoznje terminNadji = (TerminVoznje) request.getArgument();
+                            List<TerminVoznje> termini = Controller.getInstance().nadjiTerminVoznje(terminNadji);
+                            response.setResult(termini);
+                            response.setUspesno(true);
+                            break;
+                        case OBRISI_TERMIN:
+                            TerminVoznje terminObrisi = (TerminVoznje) request.getArgument();
+                            Controller.getInstance().obrisiTerminVoznje(terminObrisi);
+                            response.setUspesno(true);
+                            break;
+                        case ZAPAMTI_TERMIN:
+                            TerminVoznje terminIzmeni = (TerminVoznje) request.getArgument();
+                            System.out.println(terminIzmeni);
+                            Controller.getInstance().izmeniTerminVoznje(terminIzmeni);
                             response.setUspesno(true);
                             break;
                         default:

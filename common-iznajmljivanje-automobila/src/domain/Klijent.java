@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package domain;
 
 import java.sql.ResultSet;
@@ -95,6 +91,11 @@ public class Klijent implements AbstractDomainObject {
     }
 
     @Override
+    public String toString() {
+        return ime + " " + prezime + " email=" + email + " adresa=" + adresa;
+    }
+
+    @Override
     public String getTableName() {
         return "klijent";
     }
@@ -180,5 +181,10 @@ public class Klijent implements AbstractDomainObject {
         }
         
         return "ime LIKE '%" + k.getIme() + "%' AND prezime LIKE '%" + k.getPrezime() + "%'";
+    }
+
+    @Override
+    public void setID(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

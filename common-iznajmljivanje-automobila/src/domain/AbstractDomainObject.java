@@ -3,7 +3,6 @@ package domain;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,4 +30,6 @@ public interface AbstractDomainObject extends Serializable {
     public AbstractDomainObject getResult(ResultSet rs)throws Exception;
     
     public String getCondition(AbstractDomainObject ado);
+    
+    void setID(Long id);
 }
