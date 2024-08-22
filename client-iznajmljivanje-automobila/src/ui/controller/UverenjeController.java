@@ -56,7 +56,7 @@ public class UverenjeController {
                 uverenjeForm.getTxtDatePoc().setEnabled(true);
                 uverenjeForm.getTxtDateKraj().setEnabled(true);
                 uverenjeForm.getjTable1().setEnabled(false);
-                uverenjeForm.getBtnPotvrdi().setEnabled(true);
+                uverenjeForm.getBtnPotvrdi().setEnabled(false);
                 uverenjeForm.getTxtDatePoc().setEnabled(true);
                 uverenjeForm.getTxtDateKraj().setEnabled(true);
                 uverenjeForm.getBtnSacuvajTermin().setEnabled(true);
